@@ -29,7 +29,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	//Implement getAllUsers Method
+	//Implement getAllUsers Method -
 	@GetMapping("/users")
 	public List<User> getAllUser(){
 		return userService.getAllUsers();
