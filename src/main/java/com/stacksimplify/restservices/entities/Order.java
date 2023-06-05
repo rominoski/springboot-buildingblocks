@@ -3,6 +3,7 @@ package com.stacksimplify.restservices.entities;
 import org.springframework.hateoas.RepresentationModel;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -16,7 +17,9 @@ import jakarta.persistence.Table;
 public class Order extends RepresentationModel{
 	@Id
 	@GeneratedValue
+	@JsonView(Views.Internal.class)
 	private Long orderid;
+	@JsonView(Views.Internal.class)
 	private String orderdescription;
 
 	//Multiple Orders to can be related to One User
