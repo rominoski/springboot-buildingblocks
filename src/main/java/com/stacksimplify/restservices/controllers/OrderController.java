@@ -59,7 +59,7 @@ public class OrderController {
 	public Optional<Order> getOrderById(@PathVariable Long userid,@PathVariable("orderid") @Min(1) Long orderid) throws OrderNotFoundException{
 		log.info("Entrando en GetOrderById");
 		Optional<User> userOptional = userRepository.findById(userid);
-		log.info("Usuario Encontrado "+userOptional.get().getFisrtname());		
+		log.info("Usuario Encontrado "+userOptional.get().getFirstname());		
 		if (!userOptional.isPresent())
 			throw new OrderNotFoundException("User Not Found");
 		List<Order> orders = userOptional.get().getOrders();

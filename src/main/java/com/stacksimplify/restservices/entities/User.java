@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.hateoas.RepresentationModel;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +19,7 @@ import jakarta.validation.constraints.Size;
 //Entity 
 @Entity
 @Table(name="userss")
+@JsonIgnoreProperties({"firstname","lastname"})
 public class User extends RepresentationModel{
 	@Id
 	@GeneratedValue
@@ -25,7 +29,7 @@ public class User extends RepresentationModel{
 	private String username;
 	@Size(min=2, message= "FirstName should have atleast 2 characters")
 	@Column (name="FIRST_NAME", length=50, nullable=false)
-	private String fisrtname;
+	private String firstname;
 	@Column (name="LAST_NAME", length=50, nullable=false)
 	private String lastname;
 	@Column (name="EMAIL_ADDRESS", length=50, nullable=false)
@@ -33,6 +37,7 @@ public class User extends RepresentationModel{
 	@Column (name="ROLE", length=50, nullable=false)
 	private String role;
 	@Column (name="SSN", length=50, nullable=false, unique=true)
+	@JsonIgnore
 	private String ssn;
 	
 	@OneToMany(mappedBy="user")
@@ -45,12 +50,12 @@ public class User extends RepresentationModel{
 	//Fields constructor
 	public User(Long userid,
 			@NotEmpty(message = "Username is Mandatory field. Please provide username") String username,
-			@Size(min = 2, message = "FirstName should have atleast 2 characters") String fisrtname, String lastname,
+			@Size(min = 2, message = "FirstName should have atleast 2 characters") String firstname, String lastname,
 			String email, String role, String ssn, List<Order> orders) {
 		super();
 		this.userid = userid;
 		this.username = username;
-		this.fisrtname = fisrtname;
+		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
 		this.role = role;
@@ -74,11 +79,11 @@ public class User extends RepresentationModel{
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getFisrtname() {
-		return fisrtname;
+	public String getFirstname() {
+		return firstname;
 	}
-	public void setFisrtname(String fisrtname) {
-		this.fisrtname = fisrtname;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 	public String getLastname() {
 		return lastname;
@@ -114,7 +119,7 @@ public class User extends RepresentationModel{
 	//To String
 	@Override
 	public String toString() {
-		return "User [userid=" + userid + ", username=" + username + ", fisrtname=" + fisrtname + ", lastname="
+		return "User [userid=" + userid + ", username=" + username + ", firstname=" + firstname + ", lastname="
 				+ lastname + ", email=" + email + ", role=" + role + ", ssn=" + ssn + ", orders=" + orders + "]";
 	}
 	
